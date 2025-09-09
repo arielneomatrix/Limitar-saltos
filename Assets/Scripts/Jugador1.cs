@@ -18,7 +18,7 @@ public class Jugador1 : MonoBehaviour
         }
         // Con esta linea tiene instrucciones para ordernar al jugador saltar
 
-        rigidbody.velocity = new Vector2(Input.GetAxis("Horizonta") * 10, rigidbody.velocity.y);
+        rigidbody.velocity = new Vector2(Input.GetAxis("Horizontal") * 10, rigidbody.velocity.y);
         //Con esta linea tiene instrucciones para mover al personaje.
     }
 
