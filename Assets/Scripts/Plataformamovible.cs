@@ -7,8 +7,8 @@ public class Plataformamovible : MonoBehaviour
    public Transform pointA;
    public Transform pointB;
    public bool goingUp;
+   public float speep = 2;
 
-    // Update is called once per frame
     void Update()
     {
         Vector3 wantedPosition = Vector3.zero;
@@ -19,7 +19,7 @@ public class Plataformamovible : MonoBehaviour
             wantedPosition = pointB.position;
 
         Vector3 direction = (wantedPosition - transform.position);
-        transform.position += direction.normalized * Time.deltaTime;
+        transform.position += direction.normalized * Time.deltaTime * speep;
 
         if (direction.magnitude < 1)
         {
