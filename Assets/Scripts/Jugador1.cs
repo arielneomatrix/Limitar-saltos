@@ -7,7 +7,7 @@ public class Jugador1 : MonoBehaviour
     public new Rigidbody2D rigidbody;
     public int jumps = 2;
     // Esto es para que el jugador pueda saltar el numero de veces indicado y no más.
-
+    //aprendiendo git
     void Update()
     {
         if (Input.GetKeyDown(KeyCode.Space) && jumps > 0 )
