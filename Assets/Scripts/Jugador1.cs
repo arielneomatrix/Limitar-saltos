@@ -4,9 +4,9 @@ using UnityEngine;
 
 public class Jugador1 : MonoBehaviour
 {
-    public Rigidbody2D rigidbody;
+    public new Rigidbody2D rigidbody;
     public int jumps = 2;
-
+    // Esto es para que el jugador pueda saltar el numero de veces indicado y no más.
 
     void Update()
     {
@@ -25,5 +25,19 @@ public class Jugador1 : MonoBehaviour
     private void OnCollisionEnter2D(Collision2D collision)
     {
         jumps = 2;
+
+        if (collision.gameObject.GetComponent<Plataformamovible>() != null)
+        {
+            transform.parent = collision.transform;
+        }
+    }
+    
+    private void OnCollisionExit2D(Collision2D collision)
+    { 
+        if (collision.gameObject.GetComponent<Plataformamovible>())
+        {
+            transform.parent = null;
+        }
     }
 }
+
