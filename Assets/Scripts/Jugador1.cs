@@ -1,12 +1,15 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class Jugador1 : MonoBehaviour
 {
+    public TextMeshProUGUI pointsUI;
     public new Rigidbody2D rigidbody;
     public int jumps = 2;
+    public int points = 0;
     // Esto es para que el jugador pueda saltar el numero de veces indicado y no más.
     //aprendiendo git
     void Update()
@@ -21,13 +24,30 @@ public class Jugador1 : MonoBehaviour
 
         rigidbody.velocity = new Vector2(Input.GetAxis("Horizontal") * 10, rigidbody.velocity.y);
         //Con esta linea tiene instrucciones para mover al personaje.
+        
+        if (transform.position.y < -6)
+        {
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        }
+
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.gameObject.GetComponent <Manzana>())
+        {
+            points += 10;
+            pointsUI.text = "Puntos: " + points;
+            Destroy(collision.gameObject);
+        }
+
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
         jumps = 2;
 
-        if (collision.gameObject.GetComponent<Plataformamovible>() != null)
+        if (collision.gameObject.GetComponent<Plataformamovible>())
         {
             transform.parent = collision.transform;
         }
