@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Jugador1 : MonoBehaviour
 {
@@ -30,14 +31,22 @@ public class Jugador1 : MonoBehaviour
         {
             transform.parent = collision.transform;
         }
+        //Esto ayuda a que el jugador se mueva con la plataforma.
+       
+        if (collision.gameObject.GetComponent<Toqueenemigo>())
+        {
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        }
+
     }
-    
+
     private void OnCollisionExit2D(Collision2D collision)
     { 
         if (collision.gameObject.GetComponent<Plataformamovible>())
         {
             transform.parent = null;
         }
+        //Esto ayuda a que el jugador se mueva con la plataforma.
     }
 }
 

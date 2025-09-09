@@ -4,35 +4,31 @@ using UnityEngine;
 
 public class Toqueenemigo : MonoBehaviour
 {
-    public class Plataformamovible : MonoBehaviour
+    public Transform pointA;
+    public Transform pointB;
+    public bool goingUp;
+    public float speep = 2;
+
+    void Update()
     {
-        public Transform pointA;
-        public Transform pointB;
-        public bool goingUp;
+        Vector3 wantedPosition = Vector3.zero;
 
+        if (goingUp)
+            wantedPosition = pointA.position;
+        else
+            wantedPosition = pointB.position;
 
-        void Update()
+        Vector3 direction = (wantedPosition - transform.position);
+        transform.position += direction.normalized * Time.deltaTime * speep;
+
+        if (direction.magnitude < 1)
         {
-            Vector3 wantedPosition = Vector3.zero;
-
             if (goingUp)
-                wantedPosition = pointA.position;
+                goingUp = false;
             else
-                wantedPosition = pointB.position;
-
-            Vector3 direction = (wantedPosition - transform.position);
-            transform.position += direction.normalized * Time.deltaTime;
-
-            if (direction.magnitude < 1)
-            {
-                if (goingUp)
-                    goingUp = false;
-                else
-                    goingUp = true;
-            }
-
-
+                goingUp = true;
         }
-    }
 
+
+    }
 }
